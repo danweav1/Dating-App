@@ -20,17 +20,16 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
-import { NgxGalleryOptions } from '@kolkov/ngx-gallery';
-import { NgxGalleryImage } from '@kolkov/ngx-gallery';
-import { NgxGalleryAnimation } from '@kolkov/ngx-gallery';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, ListsComponent, MessagesComponent, MemberCardComponent, MemberDetailComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, ListsComponent, MessagesComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -48,7 +47,7 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [ErrorInterceptorProvider, MemberDetailResolver, MemberListResolver],
+  providers: [ErrorInterceptorProvider, MemberDetailResolver, MemberListResolver, MemberEditResolver],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
