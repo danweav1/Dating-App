@@ -23,13 +23,15 @@ import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, ListsComponent, MessagesComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent],
+  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, ListsComponent, MessagesComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent, PhotoEditorComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -39,6 +41,7 @@ export function tokenGetter() {
     TabsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
