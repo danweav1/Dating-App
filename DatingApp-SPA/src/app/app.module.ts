@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -25,17 +25,33 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 @NgModule({
-  declarations: [AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, ListsComponent, MessagesComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent, PhotoEditorComponent],
+  declarations: [
+    AppComponent,
+    NavComponent,
+    HomeComponent,
+    RegisterComponent,
+    MemberListComponent,
+    ListsComponent,
+    MessagesComponent,
+    MemberCardComponent,
+    MemberDetailComponent,
+    MemberEditComponent,
+    PhotoEditorComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -50,7 +66,12 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [ErrorInterceptorProvider, MemberDetailResolver, MemberListResolver, MemberEditResolver],
+  providers: [
+    ErrorInterceptorProvider,
+    MemberDetailResolver,
+    MemberListResolver,
+    MemberEditResolver,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
