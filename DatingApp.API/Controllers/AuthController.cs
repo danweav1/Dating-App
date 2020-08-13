@@ -79,7 +79,7 @@ namespace DatingApp.API.Controllers
 
       var tokenHandler = new JwtSecurityTokenHandler();
 
-      var token = tokenHandler.CreateToken(tokenDescriptor); // will contain our jwt token we want to return to clien
+      var token = tokenHandler.CreateToken(tokenDescriptor); // will contain our jwt token we want to return to client
 
       var user = _mapper.Map<UserForListDto>(userFromRepo);
 
