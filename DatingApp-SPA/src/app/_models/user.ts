@@ -7,7 +7,7 @@ export interface User {
   age: number;
   gender: string;
   created: Date;
-  lastActive: Date;
+  lastActive: any; // changed to any to fix an issue with the html loading the date as a date but expecting a string
   photoUrl: string;
   city: string;
   country: string;
