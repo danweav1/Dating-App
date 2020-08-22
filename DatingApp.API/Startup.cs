@@ -97,9 +97,10 @@ namespace DatingApp.API
                 }
             });
                 });
+                app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
