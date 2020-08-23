@@ -9,54 +9,53 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API.Controllers
 {
-  // http:localhost:5000/api/values
-  [Authorize] // with this attribute everything inside this controller has to be an authorized request
-  [Route("api/[controller]")]
-  [ApiController]
-  public class ValuesController : ControllerBase
-  {
-    private readonly DataContext _context;
-
-    public ValuesController(DataContext context)
+    // http:localhost:5000/api/values
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ValuesController : ControllerBase
     {
-      this._context = context;
+        private readonly DataContext _context;
 
-    }
+        public ValuesController(DataContext context)
+        {
+            this._context = context;
 
-    // GET api/values
-    [AllowAnonymous]
-    [HttpGet]
-    public async Task<IActionResult> GetValues()
-    {
-      var values = await _context.Values.ToListAsync();
-      return Ok(values);
-    }
+        }
 
-    // GET api/values/5
-    [AllowAnonymous]
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetValue(int id)
-    {
-      var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
-      return Ok(value);
-    }
+        // GET api/values
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetValues()
+        {
+            var values = await _context.Values.ToListAsync();
+            return Ok(values);
+        }
 
-    // POST api/values
-    [HttpPost]
-    public void Post([FromBody] string value)
-    {
-    }
+        // GET api/values/5
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetValue(int id)
+        {
+            var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
+            return Ok(value);
+        }
 
-    // PUT api/values/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
+        // POST api/values
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
 
-    // DELETE api/values/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
+        {
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+        }
     }
-  }
 }
