@@ -32,10 +32,19 @@ namespace DatingApp.API
         // Will call this function in development mode
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
+            // used to be sqlite for dev purposes but was having issues
+            // services.AddDbContext<DataContext>(x =>
+            // {
+            //     x.UseLazyLoadingProxies();
+            //     x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            // });
+
+            // ConfigureServices(services);
+
             services.AddDbContext<DataContext>(x =>
             {
                 x.UseLazyLoadingProxies();
-                x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             ConfigureServices(services);
