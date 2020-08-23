@@ -12,6 +12,8 @@
         class="form-check-input"
         value="{{ role.name }}"
         [checked]="role.checked"
+        (change)="role.checked = !role.checked"
+        [disabled]="role.name === 'Admin' && user.userName === 'Admin'"
       />
       <label>{{ role.name }}</label>
     </div>
@@ -21,7 +23,7 @@
   <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">
     Cancel
   </button>
-  <button type="button" class="btn btn-success" form="rolesForm">
+  <button type="button" class="btn btn-success" form="rolesForm" (click)="updateRoles()">
     Submit
   </button>
 </div>
