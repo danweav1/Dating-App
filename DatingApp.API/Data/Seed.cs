@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
@@ -8,7 +9,7 @@ namespace DatingApp.API.Data
 {
     public class Seed
     {
-        public static void SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
+        public static async Task SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             if (!userManager.Users.Any())
             {
@@ -26,13 +27,14 @@ namespace DatingApp.API.Data
 
                 foreach (var role in roles)
                 {
-                    roleManager.CreateAsync(role).Wait();
+                    await roleManager.CreateAsync(role);
                 }
 
                 foreach (var user in users)
                 {
-                    userManager.CreateAsync(user, "password").Wait();
-                    userManager.AddToRoleAsync(user, "Member");
+                    user.Photos.SingleOrDefault().IsApproved = true;
+                    await userManager.CreateAsync(user, "password");
+                    await userManager.AddToRoleAsync(user, "Member");
                 }
 
                 // create admin user
@@ -41,12 +43,12 @@ namespace DatingApp.API.Data
                     UserName = "Admin"
                 };
 
-                var result = userManager.CreateAsync(adminUser, "password").Result;
+                var result = await userManager.CreateAsync(adminUser, "password");
 
                 if (result.Succeeded)
                 {
-                    var admin = userManager.FindByNameAsync("Admin").Result;
-                    userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"});
+                    var admin = await userManager.FindByNameAsync("Admin");
+                    await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
                 }
             }
         }

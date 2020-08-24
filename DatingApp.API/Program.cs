@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using DatingApp.API.Data;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +13,7 @@ namespace DatingApp.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
@@ -24,7 +25,7 @@ namespace DatingApp.API
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     var roleManager = services.GetRequiredService<RoleManager<Role>>();
                     context.Database.Migrate();
-                    Seed.SeedUsers(userManager, roleManager);
+                    await Seed.SeedUsers(userManager, roleManager);
                 }
                 catch (Exception ex)
                 {
